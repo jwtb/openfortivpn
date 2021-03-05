@@ -18,29 +18,16 @@ jobs:
     
       - name: jwtb dir
         run: |
-          mkdir jwtb    
+          mkdir jwtb   
+          mkdir $HOME/jwtb2
+          ls -al          
           cd jwtb
           echo 'alpha' > alpha.txt
-          echo 'beta'  > $HOME/jwtb/beta.log
         
       - name: Checkout Code
         uses: actions/checkout@v2
         
-      - name: Install Dependencies
-        run: ./tests/ci/install_openssl.sh $HOME/jwtb/.openfortivpn-deps
 
-      - name: Build jwtb
-        run: |
-          ./autogen.sh
-          export PKG_CONFIG_PATH="$HOME/jwtb/.openfortivpn-deps/lib/pkgconfig"
-          echo "jwtb - before configure"
-          ./configure --prefix=/usr --sysconfdir=/etc
-          echo "jwtb - before make"
-          make
-          ls -altr 
-          echo "^^^^^"
-          ls -altrR *
-          tar cvf $HOME/jwtb/dir.tar .
         
         
       - name: jwtb - Use the Upload Artifact GitHub Action
