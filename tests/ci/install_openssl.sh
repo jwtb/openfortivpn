@@ -13,7 +13,7 @@ echo "jwtb get openssl ${SRC}"
 wget -O openssl.tar.gz "$SRC"
 tar -xf openssl.tar.gz -C "$HOME"
 cd "${HOME}/openssl-${VERSION}"
-echo "jwtb - ${HOME}
+echo "jwtb - ${HOME}"
 ./config --prefix="$PREFIX" shared -fPIC
 make
 make install
