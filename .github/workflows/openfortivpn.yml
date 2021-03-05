@@ -15,27 +15,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+      - name: jwtb dir
+        run: |
+          mkdir jwtb    
+          cd jwtb
+        
       - name: Checkout Code
         uses: actions/checkout@v2
- 
-      - name: jwtb dir
-        run: mkdir jwtb
         
       - name: Install Dependencies
         run: ./tests/ci/install_openssl.sh $HOME/jwtb/.openfortivpn-deps
 
       - name: Build jwtb
         run: |
-          cd jwtb
           ./autogen.sh
           export PKG_CONFIG_PATH="$HOME/jwtb/.openfortivpn-deps/lib/pkgconfig"
           echo "jwtb - before configure"
-          echo `pwd`
-          pwd
           ./configure --prefix=/usr --sysconfdir=/etc
           echo "jwtb - before make"
           make
           ls -altr 
+          echo "^^^^^"
           ls -altrR *
         
         
