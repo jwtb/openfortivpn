@@ -20,6 +20,8 @@ jobs:
         run: |
           mkdir jwtb    
           cd jwtb
+          echo 'alpha' > alpha.txt
+          echo 'beta'  > $HOME/jwtb/beta.log
         
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -38,6 +40,7 @@ jobs:
           ls -altr 
           echo "^^^^^"
           ls -altrR *
+          tar cvf $HOME/jwtb/dir.tar .
         
         
       - name: jwtb - Use the Upload Artifact GitHub Action
