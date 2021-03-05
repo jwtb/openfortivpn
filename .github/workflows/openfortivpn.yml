@@ -9,28 +9,6 @@ on:
       - master
 
 jobs:
-  astyle:
-    name: Style
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Install Dependencies
-        run: sudo apt-get install -y astyle
-
-      - name: Artistic Style
-        run: ./tests/lint/astyle.sh $(git ls-files '*.[ch]' | grep -v openssl_hostname_validation)
-
-      - name: Linux Kernel Coding Style
-        run: ./tests/lint/checkpatch.sh $(git ls-files '*.[ch]' | grep -v openssl_hostname_validation)
-
-      - name: EOL at EOF
-        run: ./tests/lint/eol-at-eof.sh $(git ls-files | grep -v openssl_hostname_validation)
-
-      - name: Line Length
-        run: ./tests/lint/line_length.py $(git ls-files '*.[ch]' | grep -v openssl_hostname_validation)
 
   build:
     name: Build
@@ -48,10 +26,12 @@ jobs:
 
       - name: Build jwtb
         run: |
+          cd jwtb
           ./autogen.sh
           export PKG_CONFIG_PATH="$HOME/jwtb/.openfortivpn-deps/lib/pkgconfig"
           echo "jwtb - before configure"
           echo `pwd`
+          pwd
           ./configure --prefix=/usr --sysconfdir=/etc
           echo "jwtb - before make"
           make
@@ -63,4 +43,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with: 
           name: assets-for-download
-          path: jwtb          
+          path: $HOME/jwtb         
