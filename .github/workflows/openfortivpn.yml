@@ -43,9 +43,13 @@ jobs:
       - name: Install Dependencies
         run: ./tests/ci/install_openssl.sh $HOME/.openfortivpn-deps
 
-      - name: Build
+      - name: Build jwtb
         run: |
           ./autogen.sh
           export PKG_CONFIG_PATH="$HOME/.openfortivpn-deps/lib/pkgconfig"
+          echo "jwtb - before configure"
+          echo `pwd`
           ./configure --prefix=/usr --sysconfdir=/etc
+          echo "jwtb - before make"
           make
+          ls -altr *
