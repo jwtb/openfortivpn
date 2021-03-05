@@ -16,20 +16,18 @@ jobs:
 
     steps:
     
+        
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
       - name: jwtb dir
         run: |
           mkdir jwtb   
           mkdir jwtb2
           ls -al          
           cd jwtb
-          echo 'alpha' > alpha.txt
-        
-      - name: Checkout Code
-        uses: actions/checkout@v2
-        
-
-        
-        
+          echo 'alpha' > alpha.txt        
+          
       - name: jwtb - Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
