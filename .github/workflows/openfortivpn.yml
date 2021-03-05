@@ -39,7 +39,7 @@ jobs:
           ls -altr 
           echo "^^^^^"
           ls -altrR *
-          tar --exclude='./jwtb' cvf jwtb/dir.tar .
+          tar --exclude='./jwtb' -cvf jwtb/dir.tar .
 
           
       - name: jwtb - Use the Upload Artifact GitHub Action
